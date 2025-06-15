@@ -174,7 +174,7 @@ export default function Marketplace() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
-            <Card>
+            <Card className="bg-white">
               <CardHeader>
                 <CardTitle className="text-lg font-semibold">Filters</CardTitle>
               </CardHeader>
@@ -200,7 +200,7 @@ export default function Marketplace() {
 
           {/* Table Content */}
           <div className="lg:col-span-3">
-            <Card>
+            <Card className="bg-white">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
