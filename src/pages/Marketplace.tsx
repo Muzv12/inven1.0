@@ -3,295 +3,368 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Search,
-  Filter,
-  Star,
-  Users,
-  DollarSign,
-  Clock,
-  ArrowUpRight,
-  Briefcase,
-  Building,
-  Globe,
+  ChevronDown,
+  Edit,
+  Download,
+  MoreHorizontal,
+  X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function Marketplace() {
-  const categories = [
-    { name: "All Services", count: 1247, active: true },
-    { name: "Legal Services", count: 324, active: false },
-    { name: "Accounting", count: 189, active: false },
-    { name: "Marketing", count: 267, active: false },
-    { name: "Technology", count: 156, active: false },
-    { name: "Consulting", count: 311, active: false },
+  const [selectedFilters, setSelectedFilters] = useState({
+    availableForSale: true,
+    onMarketListings: true,
+    offMarketListings: false,
+  });
+
+  const filterCategories = [
+    { name: "Company Name", hasRemove: true },
+    { name: "Size", hasRemove: false },
+    { name: "Ownership", hasRemove: true },
+    { name: "Keywords", hasRemove: true },
+    { name: "Headquarters", hasRemove: true },
+    { name: "Growth", hasRemove: true },
+    { name: "People", hasRemove: false },
+    { name: "Founded M&A", hasRemove: true },
+    { name: "Operating Location", hasRemove: false },
+    { name: "Search within saved lists", hasRemove: false },
   ];
 
-  const services = [
+  const tableData = [
     {
       id: 1,
-      title: "Complete Business Formation Package",
-      provider: "LegalPro Solutions",
-      rating: 4.9,
-      reviews: 324,
-      price: "$299",
-      category: "Legal Services",
-      description:
-        "Full business registration, EIN, operating agreement, and compliance setup",
-      deliveryTime: "3-5 days",
-      featured: true,
-      tags: ["LLC", "Corporation", "Partnership"],
+      user: { name: "Marincusanu", avatar: "M", color: "bg-gray-600" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "Administrator",
+      permissions: "Administrator",
+      email: "info@yourdomai.com",
+      keywords: "Marketing",
     },
     {
       id: 2,
-      title: "Monthly Bookkeeping & Tax Preparation",
-      provider: "AccountWise",
-      rating: 4.8,
-      reviews: 189,
-      price: "$149",
-      category: "Accounting",
-      description:
-        "Professional bookkeeping, financial statements, and tax preparation services",
-      deliveryTime: "Ongoing",
-      featured: false,
-      tags: ["QuickBooks", "Tax Prep", "Financial Reports"],
+      user: { name: "Vanessa Yates", avatar: "VY", color: "bg-orange-500" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "Human resources",
+      permissions: "Human resources",
+      email: "tyam@gmail.com",
+      keywords: "Marketing",
     },
     {
       id: 3,
-      title: "Digital Marketing Strategy & Implementation",
-      provider: "GrowthExperts",
-      rating: 4.7,
-      reviews: 156,
-      price: "$599",
-      category: "Marketing",
-      description:
-        "Comprehensive digital marketing strategy with SEO, PPC, and social media",
-      deliveryTime: "2 weeks",
-      featured: true,
-      tags: ["SEO", "PPC", "Social Media"],
+      user: { name: "Christian Chang", avatar: "CC", color: "bg-blue-500" },
+      status: "Pending",
+      statusColor: "bg-orange-500",
+      companyName: "Product Designer",
+      permissions: "Product Designer",
+      email: "c.chang@gmail.com",
+      keywords: "Marketing",
     },
     {
       id: 4,
-      title: "Custom Web Application Development",
-      provider: "TechBuilders",
-      rating: 4.9,
-      reviews: 89,
-      price: "$2,499",
-      category: "Technology",
-      description:
-        "Custom web application built with modern frameworks and best practices",
-      deliveryTime: "4-6 weeks",
-      featured: false,
-      tags: ["React", "Node.js", "Database"],
+      user: { name: "Kate Smit", avatar: "KS", color: "bg-gray-600" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "UI Designer",
+      permissions: "UI Designer",
+      email: "i.smith@gmail.com",
+      keywords: "Marketing",
     },
     {
       id: 5,
-      title: "Business Strategy Consultation",
-      provider: "Strategic Minds",
-      rating: 4.8,
-      reviews: 234,
-      price: "$199",
-      category: "Consulting",
-      description:
-        "In-depth business analysis and strategic planning for growth",
-      deliveryTime: "1 week",
-      featured: false,
-      tags: ["Strategy", "Analysis", "Growth"],
+      user: { name: "Lucille Bunkton", avatar: "LB", color: "bg-gray-600" },
+      status: "Pending",
+      statusColor: "bg-orange-500",
+      companyName: "UX Designer",
+      permissions: "UX Designer",
+      email: "l.bunkton@gmail.com",
+      keywords: "Marketing",
     },
     {
       id: 6,
-      title: "Intellectual Property Protection",
-      provider: "IP Guardians",
-      rating: 4.9,
-      reviews: 145,
-      price: "$399",
-      category: "Legal Services",
-      description: "Trademark, copyright, and patent protection services",
-      deliveryTime: "2-3 weeks",
-      featured: true,
-      tags: ["Trademark", "Copyright", "Patent"],
+      user: { name: "Maria Lara", avatar: "ML", color: "bg-blue-500" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "Accounting",
+      permissions: "Accounting",
+      email: "m.lara@gmail.com",
+      keywords: "Marketing",
     },
-  ];
-
-  const stats = [
-    { label: "Active Services", value: "1,247", icon: Briefcase },
-    { label: "Trusted Providers", value: "342", icon: Users },
-    { label: "Avg. Rating", value: "4.8", icon: Star },
-    { label: "Countries", value: "15", icon: Globe },
+    {
+      id: 7,
+      user: { name: "Simona Stangar", avatar: "SS", color: "bg-blue-500" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "Devops",
+      permissions: "Devops",
+      email: "s.stangar@gmail.com",
+      keywords: "Marketing",
+    },
+    {
+      id: 8,
+      user: { name: "Jessica Galley", avatar: "JG", color: "bg-orange-500" },
+      status: "Inactive",
+      statusColor: "bg-red-500",
+      companyName: "Backend",
+      permissions: "Backend",
+      email: "j.galley@gmail.com",
+      keywords: "Marketing",
+    },
+    {
+      id: 9,
+      user: { name: "Arnoldi Warren", avatar: "AW", color: "bg-orange-500" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "Sales manager",
+      permissions: "Sales manager",
+      email: "a.warren@gmail.com",
+      keywords: "Marketing",
+    },
+    {
+      id: 10,
+      user: { name: "Arnoldi Warren", avatar: "AW", color: "bg-orange-500" },
+      status: "Active",
+      statusColor: "bg-green-500",
+      companyName: "Sales manager",
+      permissions: "Sales manager",
+      email: "a.warren@gmail.com",
+      keywords: "Marketing",
+    },
   ];
 
   return (
     <Layout>
-      <div className="space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Marketplace</h1>
-          <p className="mt-2 text-gray-600">
-            Discover professional services to grow your business
-          </p>
+      <div className="space-y-4">
+        {/* Breadcrumb */}
+        <div className="text-sm text-gray-600">
+          <span>Brick-and-Mortar Business</span>
+          <span className="mx-2">{">"}</span>
+          <span>Digital Businesses</span>
+          <span className="mx-2">{">"}</span>
+          <span className="font-medium text-gray-900">Franchises</span>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <Card key={stat.label} className="dashboard-card">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-3">
-                    <Icon className="h-8 w-8 text-dashboard-500" />
-                    <div>
-                      <p className="text-2xl font-bold text-gray-900">
-                        {stat.value}
-                      </p>
-                      <p className="text-sm text-gray-600">{stat.label}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+        {/* Filter Chips */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <Badge
+            variant="secondary"
+            className="bg-gray-900 text-white hover:bg-gray-800"
+          >
+            Available for sale
+          </Badge>
+          <Badge
+            variant="secondary"
+            className="bg-blue-600 text-white hover:bg-blue-700"
+          >
+            On Market listings
+          </Badge>
+          <Badge variant="outline" className="text-gray-600">
+            Off-Market listings
+          </Badge>
         </div>
 
-        {/* Search and Filters */}
-        <Card className="dashboard-card">
-          <CardContent className="p-6">
-            <div className="flex flex-col lg:flex-row gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input placeholder="Search for services..." className="pl-10" />
-              </div>
-              <Button variant="outline" className="lg:w-auto">
-                <Filter className="h-4 w-4 mr-2" />
-                Filters
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
+        {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Categories Sidebar */}
+          {/* Filters Sidebar */}
           <div className="lg:col-span-1">
-            <Card className="dashboard-card">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-lg font-semibold">
-                  Categories
-                </CardTitle>
+                <CardTitle className="text-lg font-semibold">Filters</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className="space-y-1">
-                  {categories.map((category) => (
-                    <button
-                      key={category.name}
-                      className={`w-full px-6 py-3 text-left hover:bg-gray-50 flex items-center justify-between ${
-                        category.active
-                          ? "bg-dashboard-50 border-r-2 border-dashboard-500"
-                          : ""
-                      }`}
-                    >
-                      <span
-                        className={`text-sm font-medium ${
-                          category.active
-                            ? "text-dashboard-700"
-                            : "text-gray-700"
-                        }`}
-                      >
-                        {category.name}
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        ({category.count})
-                      </span>
-                    </button>
-                  ))}
-                </div>
+              <CardContent className="space-y-4">
+                {filterCategories.map((category, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0"
+                  >
+                    <span className="text-sm text-gray-700">
+                      {category.name}
+                    </span>
+                    {category.hasRemove && (
+                      <button className="text-gray-400 hover:text-gray-600">
+                        <X className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </div>
 
-          {/* Services Grid */}
+          {/* Table Content */}
           <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {services.map((service) => (
-                <Card
-                  key={service.id}
-                  className={`dashboard-card hover:shadow-dashboard-lg transition-all duration-200 ${
-                    service.featured ? "ring-2 ring-dashboard-200" : ""
-                  }`}
-                >
-                  {service.featured && (
-                    <div className="bg-gradient-to-r from-dashboard-500 to-dashboard-600 text-white text-xs font-semibold px-3 py-1 rounded-t-lg">
-                      Featured Service
-                    </div>
-                  )}
-                  <CardHeader className={service.featured ? "pt-4" : ""}>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-lg font-semibold text-gray-900 line-clamp-2">
-                          {service.title}
-                        </CardTitle>
-                        <p className="text-sm text-gray-600 mt-1">
-                          {service.provider}
-                        </p>
-                      </div>
-                      <Button variant="ghost" size="sm">
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                      {service.description}
-                    </p>
-
-                    <div className="flex items-center space-x-4 mb-4">
-                      <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                        <span className="text-sm font-medium">
-                          {service.rating}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                          ({service.reviews})
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="h-4 w-4 text-gray-400" />
-                        <span className="text-sm text-gray-600">
-                          {service.deliveryTime}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {service.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="text-xs"
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <span className="text-sm text-gray-600">
+                      Export <ChevronDown className="inline h-4 w-4 ml-1" />
+                    </span>
+                    <span className="text-sm text-gray-600">
+                      Create alert{" "}
+                      <ChevronDown className="inline h-4 w-4 ml-1" />
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Button variant="outline" size="sm">
+                      Edit
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {/* Table */}
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          User <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          Status <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          Company Name{" "}
+                          <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          Permissions{" "}
+                          <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          Permissions{" "}
+                          <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          Email <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-600 text-sm">
+                          Keywords{" "}
+                          <ChevronDown className="inline h-4 w-4 ml-1" />
+                        </th>
+                        <th className="py-3 px-4"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tableData.map((row) => (
+                        <tr
+                          key={row.id}
+                          className="border-b border-gray-100 hover:bg-gray-50"
                         >
-                          {tag}
-                        </Badge>
+                          <td className="py-3 px-4">
+                            <div className="flex items-center space-x-3">
+                              <div
+                                className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${row.user.color}`}
+                              >
+                                {row.user.avatar}
+                              </div>
+                              <span className="text-sm font-medium text-gray-900">
+                                {row.user.name}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-3 px-4">
+                            <div className="flex items-center space-x-2">
+                              <div
+                                className={`w-2 h-2 rounded-full ${row.statusColor}`}
+                              ></div>
+                              <span className="text-sm text-gray-700">
+                                {row.status}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-sm text-gray-900">
+                              {row.companyName}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-sm text-gray-700">
+                              {row.permissions}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-sm text-gray-700">
+                              {row.permissions}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer">
+                              {row.email}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-sm text-gray-700">
+                              {row.keywords}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <Button variant="ghost" size="sm">
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </td>
+                        </tr>
                       ))}
-                    </div>
+                    </tbody>
+                  </table>
+                </div>
 
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-1">
-                        <DollarSign className="h-4 w-4 text-green-600" />
-                        <span className="text-xl font-bold text-gray-900">
-                          {service.price}
-                        </span>
-                      </div>
-                      <Button size="sm">View Details</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                {/* Pagination */}
+                <div className="flex items-center justify-between mt-6">
+                  <Button variant="outline" size="sm">
+                    <ChevronLeft className="h-4 w-4 mr-1" />
+                    Previous
+                  </Button>
+                  <div className="flex items-center space-x-1">
+                    <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                      1
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                      2
+                    </Button>
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-8 h-8 p-0 bg-blue-600"
+                    >
+                      3
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                      4
+                    </Button>
+                    <span className="px-2 text-sm text-gray-500">...</span>
+                    <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                      13
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                      14
+                    </Button>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    Next
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                  </Button>
+                </div>
 
-            {/* Load More */}
-            <div className="mt-8 text-center">
-              <Button variant="outline" size="lg">
-                Load More Services
-              </Button>
-            </div>
+                {/* Bottom Actions */}
+                <div className="flex justify-end mt-4">
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Talk to Alisha
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
