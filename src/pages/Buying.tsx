@@ -181,7 +181,10 @@ export default function Buying() {
           >
             On Market listings
           </Badge>
-          <Badge variant="outline" className="text-gray-600">
+          <Badge
+            variant="secondary"
+            className="bg-gray-900 text-white hover:bg-gray-800"
+          >
             Off-Market listings
           </Badge>
         </div>
