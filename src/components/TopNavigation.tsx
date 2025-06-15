@@ -115,9 +115,10 @@ export function TopNavigation() {
         </div>
       </div>
 
-      {/* Secondary Navigation - Show on marketplace and buying pages */}
+      {/* Secondary Navigation - Show on marketplace, buying and selling pages */}
       {(location.pathname === "/marketplace" ||
-        location.pathname === "/buying") && (
+        location.pathname === "/buying" ||
+        location.pathname === "/selling") && (
         <div className="border-t border-gray-100 bg-gray-50">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex items-center space-x-2 h-12">
