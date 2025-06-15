@@ -7,17 +7,6 @@ export default function Marketplace() {
   return (
     <Layout>
       <div className="space-y-6">
-        {/* Header */}
-        <div className="text-center">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-dashboard-500 to-dashboard-600 rounded-full flex items-center justify-center mb-4">
-            <ShoppingCart className="h-8 w-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900">Marketplace</h1>
-          <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
-            Discover professional services to grow your business
-          </p>
-        </div>
-
         {/* Coming Soon Card */}
         <Card className="dashboard-card max-w-2xl mx-auto">
           <CardHeader className="text-center">
