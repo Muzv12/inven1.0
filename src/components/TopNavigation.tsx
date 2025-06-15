@@ -26,8 +26,8 @@ const navigation = [
 ];
 
 const secondaryNavigation = [
-  { name: "Buying", href: "/buying", active: true },
-  { name: "Selling", href: "/selling", active: false },
+  { name: "Buying", href: "/buying" },
+  { name: "Selling", href: "/selling" },
 ];
 
 export function TopNavigation() {
@@ -115,25 +115,29 @@ export function TopNavigation() {
         </div>
       </div>
 
-      {/* Secondary Navigation - Only show on marketplace page */}
-      {location.pathname === "/marketplace" && (
+      {/* Secondary Navigation - Show on marketplace and buying pages */}
+      {(location.pathname === "/marketplace" ||
+        location.pathname === "/buying") && (
         <div className="border-t border-gray-100 bg-gray-50">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex items-center space-x-2 h-12">
-              {secondaryNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={cn(
-                    "px-3 py-2 text-sm font-medium rounded-md transition-colors border",
-                    item.active
-                      ? "bg-white text-blue-700 shadow-sm border-gray-200"
-                      : "bg-transparent text-gray-600 hover:text-gray-900 hover:bg-white border-transparent",
-                  )}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {secondaryNavigation.map((item) => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={cn(
+                      "px-3 py-2 text-sm font-medium rounded-md transition-colors border",
+                      isActive
+                        ? "bg-white text-blue-700 shadow-sm border-gray-200"
+                        : "bg-transparent text-gray-600 hover:text-gray-900 hover:bg-white border-transparent",
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
