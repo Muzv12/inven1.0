@@ -142,13 +142,29 @@ export default function Buying() {
   return (
     <Layout>
       <div className="space-y-4">
-        {/* Breadcrumb */}
-        <div className="text-sm text-gray-600">
-          <span>Brick-and-Mortar Business</span>
-          <span className="mx-2">{">"}</span>
-          <span>Digital Businesses</span>
-          <span className="mx-2">{">"}</span>
-          <span className="font-medium text-gray-900">Franchises</span>
+        {/* Selection Buttons */}
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+          >
+            Brick-and-Mortar Business
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          >
+            Digital Businesses
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          >
+            Franchises
+          </Button>
         </div>
 
         {/* Filter Chips */}
